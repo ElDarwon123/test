@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Movies.Domain\Movies.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Abstractions\Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,13 @@
+using Abstractions.Repositories;
 using Movies.Domain.Entities;
 
 namespace Movies.Application.Contracts;
 
-public interface IMovieRepository
+public interface IMovieRepository : IGenericRepository<Movie>
 {
-    Task<List<Movie>> GetAllAsync(CancellationToken cancellationToken = default);
-    Task<Movie?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-    Task AddAsync(Movie movie, CancellationToken cancellationToken = default);
+    // Métodos específicos para Movie que pueden ser implementados en el futuro
+    // Ejemplo:
+    // Task<List<Movie>> GetMoviesByGenreAsync(string genre, CancellationToken cancellationToken = default);
+    // Task<List<Movie>> GetMoviesByYearAsync(int year, CancellationToken cancellationToken = default);
+    // Task<Movie?> GetMovieByTitleAsync(string title, CancellationToken cancellationToken = default);
 }

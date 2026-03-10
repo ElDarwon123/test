@@ -1,31 +1,22 @@
-using Microsoft.EntityFrameworkCore;
+using Abstractions.Repositories;
 using Movies.Application.Contracts;
 using Movies.Domain.Entities;
 
 namespace Movies.Infrastructure.Persistence.Repositories;
 
-public class MovieRepository : IMovieRepository
+public class MovieRepository : GenericRepository<Movie, MoviesDbContext>, IMovieRepository
 {
-    private readonly MoviesDbContext _dbContext;
-
-    public MovieRepository(MoviesDbContext dbContext)
+    public MovieRepository(MoviesDbContext dbContext) : base(dbContext)
     {
-        _dbContext = dbContext;
     }
-
-    public async Task<List<Movie>> GetAllAsync(CancellationToken cancellationToken = default)
-    {
-        return await _dbContext.Movies.ToListAsync(cancellationToken);
-    }
-
-    public async Task<Movie?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        return await _dbContext.Movies.FindAsync([id], cancellationToken);
-    }
-
-    public async Task AddAsync(Movie movie, CancellationToken cancellationToken = default)
-    {
-        await _dbContext.Movies.AddAsync(movie, cancellationToken);
-        await _dbContext.SaveChangesAsync(cancellationToken);
-    }
+    
+    // Implementaciones de métodos específicos para Movie
+    // Ejemplo de cómo agregar métodos personalizados:
+    
+    // public async Task<List<Movie>> GetMoviesByGenreAsync(string genre, CancellationToken cancellationToken = default)
+    // {
+    //     return await _dbSet
+    //         .Where(m => m.Genre == genre)
+    //         .ToListAsync(cancellationToken);
+    // }
 }
