@@ -19,7 +19,7 @@ public static class MoviesModule
         services.AddDbContext<MoviesDbContext>(options =>
             options.UseSqlite(configuration.GetConnectionString("MoviesDb")));
 
-        services.AddScoped<IMovieRepository, MovieRepository>();
+        services.AddScoped<IPeliculaRepository, PeliculaRepository>();
 
         services.AddLiteBus(liteBus =>
         {

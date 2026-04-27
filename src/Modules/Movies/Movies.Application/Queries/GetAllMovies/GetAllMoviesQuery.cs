@@ -3,4 +3,4 @@ using Movies.Application.DTOs;
 
 namespace Movies.Application.Queries.GetAllMovies;
 
-public record GetAllMoviesQuery : IQuery<List<MovieDto>>;
+public record GetAllMoviesQuery : IQuery<List<PeliculaDto>>;

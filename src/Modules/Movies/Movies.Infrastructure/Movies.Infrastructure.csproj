@@ -3,6 +3,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Abstractions\Abstractions.csproj" />
     <ProjectReference Include="..\Movies.Application\Movies.Application.csproj" />
+    <ProjectReference Include="..\..\Asientos\Asientos.Domain\Asientos.Domain.csproj" />
+    <ProjectReference Include="..\..\Horarios\Horarios.Domain\Horarios.Domain.csproj" />
+    <ProjectReference Include="..\..\ListaPrecios\ListaPrecios.Domain\ListaPrecios.Domain.csproj" />
+    <ProjectReference Include="..\..\Reservas\Reservas.Domain\Reservas.Domain.csproj" />
+    <ProjectReference Include="..\..\Salas\Salas.Domain\Salas.Domain.csproj" />
+    <ProjectReference Include="..\..\Tickets\Tickets.Domain\Tickets.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

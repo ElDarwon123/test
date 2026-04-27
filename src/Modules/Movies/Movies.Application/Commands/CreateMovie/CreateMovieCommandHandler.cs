@@ -6,24 +6,25 @@ namespace Movies.Application.Commands.CreateMovie;
 
 public class CreateMovieCommandHandler : ICommandHandler<CreateMovieCommand>
 {
-    private readonly IMovieRepository _movieRepository;
+    private readonly IPeliculaRepository _peliculaRepository;
 
-    public CreateMovieCommandHandler(IMovieRepository movieRepository)
+    public CreateMovieCommandHandler(IPeliculaRepository peliculaRepository)
     {
-        _movieRepository = movieRepository;
+        _peliculaRepository = peliculaRepository;
     }
 
     public async Task HandleAsync(CreateMovieCommand command, CancellationToken cancellationToken = default)
     {
-        var movie = new Movie
+        var pelicula = new Pelicula
         {
-            Id = Guid.NewGuid(),
-            Title = command.Title,
-            Description = command.Description,
-            Year = command.Year,
-            Genre = command.Genre
+            Titulo = command.Titulo,
+            Genero = command.Genero,
+            DuracionMin = command.DuracionMin,
+            Clasificacion = command.Clasificacion,
+            FechaEstreno = command.FechaEstreno,
+            Estado = command.Estado
         };
 
-        await _movieRepository.AddAsync(movie, cancellationToken);
+        await _peliculaRepository.AddAsync(pelicula, cancellationToken);
     }
 }

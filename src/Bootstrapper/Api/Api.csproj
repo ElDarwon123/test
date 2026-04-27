@@ -3,6 +3,18 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\Movies\Movies.Infrastructure\Movies.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Movies\Movies.Presentation\Movies.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Asientos\Asientos.Infrastructure\Asientos.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Asientos\Asientos.Presentation\Asientos.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Horarios\Horarios.Infrastructure\Horarios.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Horarios\Horarios.Presentation\Horarios.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\ListaPrecios\ListaPrecios.Infrastructure\ListaPrecios.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\ListaPrecios\ListaPrecios.Presentation\ListaPrecios.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Reservas\Reservas.Infrastructure\Reservas.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Reservas\Reservas.Presentation\Reservas.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Salas\Salas.Infrastructure\Salas.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Salas\Salas.Presentation\Salas.Presentation.csproj" />
+    <ProjectReference Include="..\..\Modules\Tickets\Tickets.Infrastructure\Tickets.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Tickets\Tickets.Presentation\Tickets.Presentation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

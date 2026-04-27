@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Abstractions.Repositories;
 
-public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity> 
-    where TEntity : class 
+public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity>
+    where TEntity : class
     where TContext : DbContext
 {
     protected readonly TContext _dbContext;
@@ -20,7 +21,7 @@ public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity>
         return await _dbSet.ToListAsync(cancellationToken);
     }
 
-    public virtual async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public virtual async Task<TEntity?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         return await _dbSet.FindAsync([id], cancellationToken);
     }
@@ -37,13 +38,28 @@ public class GenericRepository<TEntity, TContext> : IGenericRepository<TEntity>
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public virtual async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    public virtual async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
     {
         var entity = await GetByIdAsync(id, cancellationToken);
         if (entity != null)
         {
             _dbSet.Remove(entity);
             await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+    }
+
+    public virtual async Task SoftDeleteAsync(int id, CancellationToken cancellationToken = default)
+    {
+        var entity = await GetByIdAsync(id, cancellationToken);
+        if (entity != null)
+        {
+            var activeProp = entity.GetType().GetProperty("Active", BindingFlags.Public | BindingFlags.Instance);
+            if (activeProp != null && activeProp.PropertyType == typeof(bool))
+            {
+                activeProp.SetValue(entity, false);
+                _dbSet.Update(entity);
+                await _dbContext.SaveChangesAsync(cancellationToken);
+            }
         }
     }
 }

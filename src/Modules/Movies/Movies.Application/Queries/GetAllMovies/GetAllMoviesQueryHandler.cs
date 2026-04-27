@@ -4,21 +4,30 @@ using Movies.Application.DTOs;
 
 namespace Movies.Application.Queries.GetAllMovies;
 
-public class GetAllMoviesQueryHandler : IQueryHandler<GetAllMoviesQuery, List<MovieDto>>
+public class GetAllMoviesQueryHandler : IQueryHandler<GetAllMoviesQuery, List<PeliculaDto>>
 {
-    private readonly IMovieRepository _movieRepository;
+    private readonly IPeliculaRepository _peliculaRepository;
 
-    public GetAllMoviesQueryHandler(IMovieRepository movieRepository)
+    public GetAllMoviesQueryHandler(IPeliculaRepository peliculaRepository)
     {
-        _movieRepository = movieRepository;
+        _peliculaRepository = peliculaRepository;
     }
 
-    public async Task<List<MovieDto>> HandleAsync(GetAllMoviesQuery query, CancellationToken cancellationToken = default)
+    public async Task<List<PeliculaDto>> HandleAsync(GetAllMoviesQuery query, CancellationToken cancellationToken = default)
     {
-        var movies = await _movieRepository.GetAllAsync(cancellationToken);
+        var peliculas = await _peliculaRepository.GetAllAsync(cancellationToken);
 
-        return movies
-            .Select(m => new MovieDto(m.Id, m.Title, m.Description, m.Year, m.Genre))
+        return peliculas
+            .Where(p => p.Active)
+            .Select(p => new PeliculaDto(
+                p.IdPelicula,
+                p.Titulo,
+                p.Genero,
+                p.DuracionMin,
+                p.Clasificacion,
+                p.FechaEstreno,
+                p.Estado,
+                p.Active))
             .ToList();
     }
 }
